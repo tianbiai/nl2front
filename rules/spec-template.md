@@ -2,31 +2,15 @@
 
 ## 📚 适用的技能文档清单
 
-在编写本规格说明书时，已阅读并遵循以下技能文档：
+在编写本规格说明书时，请遵循 **`rules/skills-checklist.md`** 中列出的技能文档。
 
-### 核心 Vue 技能（必须阅读）
+**核心技能**（必须阅读）：
 
-- [ ] `vue-best-practices/SKILL.md` ⭐⭐⭐ - Vue 3 核心最佳实践（响应式、组件、Props/Emits、模板、生命周期、插槽、过渡、TypeScript、性能等）
-- [ ] `vue-development-guides/SKILL.md` ⭐⭐⭐ - Vue.js 开发核心原则（状态可预测、数据流明确、组件小型化）
+- `vue-best-practices/SKILL.md` ⭐⭐⭐ - Vue 3 核心最佳实践
+- `vue-development-guides/SKILL.md` ⭐⭐⭐ - Vue.js 开发核心原则
+- `frontend-design/SKILL.md` ⭐⭐ - 前端界面设计规范
 
-### 状态管理与路由（按需阅读）
-
-- [ ] `vue-pinia-best-practices/SKILL.md` - 使用 Pinia 状态管理时必读
-- [ ] `vue-router-best-practices/SKILL.md` - 使用 Vue Router 时必读
-
-### Composable 开发（按需阅读）
-
-- [ ] `create-adaptable-composable/SKILL.md` - 创建可复用 Composable 时必读
-
-### 前端设计与样式（必须阅读）
-
-- [ ] `frontend-design/SKILL.md` ⭐⭐ - 前端界面设计规范（避免通用 AI 美学、创造独特的视觉风格）
-- [ ] `brand-guidelines/SKILL.md` - 应用 Anthropic 官方品牌颜色和字体时参考
-- [ ] `theme-factory/SKILL.md` - 使用 10 种预设主题样式时参考
-
-### 其他技能（按需阅读）
-
-- [ ] `vue-jsx-best-practices/SKILL.md` - 使用 JSX 语法时必读
+**完整技能清单**：参见 [skills-checklist.md](../rules/skills-checklist.md)
 
 ## 📋 业务与功能
 
@@ -45,7 +29,22 @@
 - **P1 [功能模块3]**：[功能描述]
 - **P2 [功能模块4]**：[功能描述]
 
-### 1.3 交互要点
+### 1.3 强制要求（必须遵循）
+
+> ⚠️ **强制要求**：页面可视化区域的右上角都必须有醒目的帮助说明气泡效果，点击显示页面说明信息。
+
+**帮助说明气泡规范**：
+
+- **位置**：页面可视区域的右上角（固定定位）
+- **图标**：使用醒目的问号图标（`QuestionFilled` 或类似图标）
+- **交互**：点击气泡显示帮助内容
+- **显示方式**：气泡弹出、Popover 或 Drawer
+- **帮助内容**：
+  - 页面功能说明
+  - 业务流程说明
+  - 其他注意事项
+
+### 1.4 交互要点
 
 > 关键的交互触发点、反馈机制、状态变化
 
@@ -229,20 +228,3 @@
 - **悬停微交互**：[描述]
 - **状态变化过渡**：[描述]
 - **其他动画效果**：[描述]
-
----
-
-### 4.6 特殊要求
-
-> ⚠️ **强制要求**：页面可视化区域的右上角都必须有醒目的帮助说明气泡效果，点击显示页面说明信息。
-
-**帮助说明气泡规范**：
-
-- **位置**：页面可视区域的右上角（固定定位）
-- **图标**：使用醒目的问号图标（`QuestionFilled` 或类似图标）
-- **交互**：点击气泡显示帮助内容
-- **显示方式**：气泡弹出、Popover 或 Drawer
-- **帮助内容**：
-  - 页面功能说明
-  - 业务流程说明
-  - 其他注意事项

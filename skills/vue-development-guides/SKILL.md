@@ -37,11 +37,11 @@ compatibility: Requires Vue 3 (or above) or Nuxt 3 (or above) project
 
 ## Reactivity
 
-IMPORTANT: You MUST follow the `references/reactivity-guide.md` for reactive state management when creating, updating a component or a composable.
+IMPORTANT: You MUST follow the `reference/reactivity-guide.md` for reactive state management when creating, updating a component or a composable.
 
 ## Components
 
-IMPORTANT: You MUST follow the `references/sfc-guide.md` for best practices when working with Vue SFCs.
+IMPORTANT: You MUST follow the `reference/sfc-guide.md` for best practices when working with Vue SFCs.
 
 - Prefer Vue Single-File Components (SFC) using **`<script setup lang="ts">`** (TypeScript) by default.
 - In Vue SFCs, keep sections in this order: `<script>` → `<template>` → `<style>`.
@@ -58,10 +58,10 @@ NOTE: This rule also applies to the entry component (e.g. App.vue) in a Vue / Nu
 
 ### Data Flow
 
-IMPORTANT: You MUST follow the `references/data-flow-guide.md` for passing and receiving data between components using:
+IMPORTANT: You MUST follow the `reference/data-flow-guide.md` for passing and receiving data between components using:
 - Props
 - Emits
 - `v-model`
 - provide/inject
 
-For sharing data across the app, please follow the `references/state-management-guide.md` and consider using a Store for state management solution.
+For sharing data across the app, please follow the `reference/state-management-guide.md` and consider using a Store for state management solution.
