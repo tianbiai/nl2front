@@ -1,0 +1,86 @@
+{
+  "title": "项目管理聚合基座",
+  "version": "1.0.0",
+  "groups": [
+    {
+      "id": "group-001",
+      "name": "燃气积分商城",
+      "icon": "🔥",
+      "expanded": true,
+      "children": [
+        {
+          "id": "item-001",
+          "name": "小程序端",
+          "icon": "📱",
+          "type": "mobile",
+          "url": "http://localhost:3001",
+          "description": "燃气用户积分商城小程序",
+          "viewport": {
+            "width": 375,
+            "height": 812
+          },
+          "projectPath": "projects/gas/miniprogram",
+          "documents": {
+            "spec": true,
+            "changelog": true,
+            "api": false
+          }
+        },
+        {
+          "id": "item-002",
+          "name": "管理后台",
+          "icon": "🖥️",
+          "type": "web",
+          "url": "http://localhost:3002",
+          "description": "商城运营管理后台",
+          "projectPath": "projects/gas/admin",
+          "documents": {
+            "spec": true,
+            "changelog": true,
+            "api": true
+          }
+        },
+        {
+          "id": "item-003",
+          "name": "需求文档",
+          "icon": "📋",
+          "type": "doc",
+          "docPath": "projects/gas/需求规格说明书.md",
+          "description": "项目需求规格说明"
+        }
+      ]
+    },
+    {
+      "id": "group-002",
+      "name": "系统管理",
+      "icon": "⚙️",
+      "expanded": true,
+      "children": [
+        {
+          "id": "item-sys-001",
+          "name": "菜单管理",
+          "icon": "📝",
+          "type": "internal",
+          "route": "/menu-editor",
+          "description": "可视化菜单编辑器"
+        },
+        {
+          "id": "item-sys-002",
+          "name": "系统设置",
+          "icon": "🔧",
+          "type": "internal",
+          "route": "/settings",
+          "description": "系统配置与设置"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "theme": "light",
+    "sidebarCollapsed": false,
+    "defaultViewport": {
+      "mobile": { "width": 375, "height": 812 },
+      "tablet": { "width": 768, "height": 1024 }
+    }
+  }
+}

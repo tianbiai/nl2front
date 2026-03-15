@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "nickname": "管理员",
+      "role": "admin",
+      "avatar": ""
+    },
+    {
+      "id": 2,
+      "username": "guest",
+      "password": "guest123",
+      "nickname": "访客",
+      "role": "guest",
+      "avatar": ""
+    }
+  ]
+}

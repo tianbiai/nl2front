@@ -1,9 +1,11 @@
 # Claude Code 本地设置
-.claude/
+.history/
+.playwright-mcp/
 
 # Node modules
 node_modules/
 
+manager/logs
 # 日志文件
 *.log
 npm-debug.log*
@@ -34,3 +36,4 @@ dist-ssr/
 
 # Projects 目录
 projects/
+.claude/settings.local.json

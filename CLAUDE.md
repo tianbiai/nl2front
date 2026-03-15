@@ -4,10 +4,26 @@
 
 ### 规则 1：文档驱动开发
 
-- 编写代码前必须先生成 spec.md 和 plan.md
+- 编写代码前必须先生成 spec.md 和 changelog.md
 - 页面级 `specs/{页面名}.md` 不存在时，禁止编写页面代码
 - 代码必须与 spec.md 完全一致
-- 每完成一个任务必须更新 plan.md 进度
+- **大变更**必须更新 changelog.md，记录所有变更
+- **小调整**无需记录 changelog（详见下方变更分级规则）
+
+**变更分级规则**：
+
+- **大变更（需记录 changelog）**：
+  - 新增/删除页面或功能模块
+  - 修改业务逻辑或交互流程
+  - 新增/修改 API 接口
+  - 重构代码结构
+  - 修复 bug
+  - 升级依赖版本
+- **小调整（无需记录 changelog）**：
+  - 调整颜色、字体、间距等样式
+  - 修改元素位置或尺寸
+  - 修改文案内容（非业务相关）
+  - 优化代码格式或注释
 
 **阻断机制**：发现缺失对应文档 → 立即停止 → 先生成文档
 
@@ -16,7 +32,7 @@
 1. **开发前**：检查 `{页面名}.md` 是否存在，不存在则先生成
 2. **编码前**：完整阅读 `{页面名}.md`
 3. **编码中**：严格按照 spec.md 实现
-4. **完成后**：验证 specs 目录下是否存在对应的 `{页面名}.md`
+4. **完成后**：验证 specs 目录下是否存在对应的 `{页面名}.md`，若为大变更则更新 changelog.md
 
 **页面强制要求**：每个页面右上角必须有帮助说明气泡（问号图标），点击显示页面功能说明、业务流程等。
 
@@ -60,9 +76,9 @@
 ## 工作流程
 
 ```
-需求分析 → 开发计划(plan.md) → 项目spec.md → 搭建框架 → 功能开发 → 验证交付
-                                    ↓
-                              页面spec.md
+需求分析 → 变更日志(changelog.md) → 项目spec.md → 搭建框架 → 功能开发 → 验证交付
+                                        ↓
+                                  页面spec.md
 ```
 
 ### 阶段 1：需求分析与澄清
@@ -72,14 +88,18 @@
 - **基础要素**：页面名称、核心目标、目标平台、功能清单、数据来源、交互流程
 - **设计要素**：设计理念、视觉风格、主色调、辅助色、布局方式、参考案例
 
-### 阶段 2：生成开发计划
+### 阶段 2：生成变更日志
 
-创建 `projects/项目名/plan.md`（多子系统项目在项目根目录创建，整个项目唯一），包含：
+创建 `projects/项目名/changelog.md`（多子系统项目在各子系统目录下分别创建），使用模板 `rules/changelog-template.md`，包含：
 
-- 项目概述（名称、平台、技术栈、日期）
-- 任务清单（初始化 → 页面开发 → 集成验证）
-- 当前进度跟踪
-- 问题记录
+- 版本历史（版本号、日期、类型、变更内容）
+- 页面变更记录（页面名、版本、变更类型、描述）
+
+**变更日志维护要求**：
+
+- 仅**大变更**需更新 changelog.md（小调整无需记录）
+- 确保该文档记录项目所有重要变更
+- 方便开发和测试人员对照验证
 
 ### 阶段 3：生成项目 spec.md
 
@@ -95,7 +115,7 @@
 ### 阶段 5：功能开发
 
 ```
-检查spec存在 → 阅读spec → 编写代码 → 验证功能 → 确认spec存在 → 更新plan.md
+检查spec存在 → 阅读spec → 编写代码 → 验证功能 → 确认spec存在 → (大变更时)更新changelog.md
 ```
 
 - API 接口使用 Mock 数据
@@ -106,7 +126,7 @@
 - 项目可编译且正常启动
 - 所有功能正常运行
 - 代码与 spec.md 一致
-- plan.md 中所有任务已完成
+- changelog.md 已记录所有大变更
 
 ---
 
@@ -118,7 +138,7 @@
 projects/
  └── 项目名/
      ├── spec.md          # 项目级规格
-     ├── plan.md          # 开发计划（唯一）
+     ├── changelog.md     # 变更日志（唯一）
      ├── specs/           # 页面级规格
      │   └── 页面名.md
      └── src/
@@ -131,27 +151,25 @@ projects/
 ```
 projects/
  └── 项目名/
-     ├── plan.md          # 整个项目唯一的开发计划
      ├── 子系统A/
      │   ├── spec.md      # 子系统A的项目级规格
+     │   ├── changelog.md # 子系统A的变更日志
      │   ├── specs/       # 子系统A的页面级规格
      │   │   └── 页面名.md
      │   └── src/
      ├── 子系统B/
      │   ├── spec.md      # 子系统B的项目级规格
+     │   ├── changelog.md # 子系统B的变更日志
      │   ├── specs/       # 子系统B的页面级规格
      │   │   └── 页面名.md
      │   └── src/
      └── ...
 ```
 
-**说明**：多子系统项目时，`plan.md` 位于项目根目录统一管理，`spec.md` 和 `specs/` 在各子系统目录下分别创建。
+**说明**：多子系统项目时，`spec.md`、`changelog.md` 和 `specs/` 均在各子系统目录下分别创建，每个子系统独立管理自己的文档。
 
 ---
 
 ## 技能文档参考
 
-- [vue-best-practices/SKILL.md](skills/vue-best-practices/SKILL.md)
-- [vue-development-guides/SKILL.md](skills/vue-development-guides/SKILL.md)
-- [frontend-design/SKILL.md](skills/frontend-design/SKILL.md)
-- [skills-checklist.md](rules/skills-checklist.md)
+- [rules/skills-checklist.md](rules/skills-checklist.md)
