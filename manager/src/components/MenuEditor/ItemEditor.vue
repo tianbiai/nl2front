@@ -105,8 +105,33 @@
 
         <!-- 文档配置 -->
         <template v-if="editForm.type === 'doc'">
-          <el-form-item label="文档路径" prop="docPath">
-            <el-input v-model="editForm.docPath" placeholder="path/to/doc.md" />
+          <el-form-item label="选择文档" prop="docId">
+            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+              <el-select
+                v-model="editForm.docId"
+                filterable
+                placeholder="请从文档库选择文档"
+                style="width: 100%"
+              >
+                <el-option
+                  v-for="doc in docStore.docs"
+                  :key="doc.id"
+                  :label="doc.name"
+                  :value="doc.id"
+                >
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>{{ doc.name }}</span>
+                    <span style="color: var(--text-tertiary); font-size: 12px;">
+                      {{ doc.description || '无描述' }}
+                    </span>
+                  </div>
+                </el-option>
+              </el-select>
+              <el-link type="primary" :underline="false" @click="goToDocLibrary">
+                <el-icon><Link /></el-icon>
+                前往文档库管理文档
+              </el-link>
+            </div>
           </el-form-item>
         </template>
 
@@ -129,7 +154,12 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useDocStore } from '@/stores/doc'
+
+const router = useRouter()
+const docStore = useDocStore()
 
 const props = defineProps({
   item: {
@@ -149,7 +179,7 @@ const editForm = reactive({
   icon: '',
   type: 'web',
   url: '',
-  docPath: '',
+  docId: '',
   route: '',
   description: '',
   projectPath: '',
@@ -184,12 +214,16 @@ watch(() => props.item, (newItem) => {
 // 监听编辑对话框打开
 watch(showEditDialog, (visible) => {
   if (visible) {
+    // 加载文档列表
+    if (docStore.docs.length === 0) {
+      docStore.fetchDocs()
+    }
     Object.assign(editForm, {
       name: localItem.name,
       icon: localItem.icon,
       type: localItem.type,
       url: localItem.url || '',
-      docPath: localItem.docPath || '',
+      docId: localItem.docId || '',
       route: localItem.route || '',
       description: localItem.description || '',
       projectPath: localItem.projectPath || '',
@@ -205,6 +239,12 @@ watch(showEditDialog, (visible) => {
 // 处理更新
 function handleUpdate() {
   emit('update', { name: localItem.name })
+}
+
+// 前往文档库
+function goToDocLibrary() {
+  router.push('/doc-library')
+  showEditDialog.value = false
 }
 
 // 保存编辑
@@ -232,7 +272,7 @@ async function handleSave() {
       updates.authUsername = editForm.authUsername
       updates.authPassword = editForm.authPassword
     } else if (editForm.type === 'doc') {
-      updates.docPath = editForm.docPath
+      updates.docId = editForm.docId
     }
 
     Object.assign(localItem, updates)
@@ -242,6 +282,13 @@ async function handleSave() {
     // 验证失败
   }
 }
+
+// 初始化时加载文档列表
+onMounted(() => {
+  if (docStore.docs.length === 0) {
+    docStore.fetchDocs()
+  }
+})
 </script>
 
 <style lang="scss" scoped>
