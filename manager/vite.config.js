@@ -1,13 +1,9 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-import { docsServerPlugin } from './server/index.js'
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    docsServerPlugin()
-  ],
+  plugins: [vue()],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')

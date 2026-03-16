@@ -24,7 +24,7 @@
         <HelpBubble :items="[{ content: 'Markdown 文档查看器' }]" />
       </div>
       <div class="content-body doc-body">
-        <DocViewer :doc-id="item?.docId" />
+        <DocViewer :doc-path="'/' + item?.docPath" />
       </div>
     </template>
 

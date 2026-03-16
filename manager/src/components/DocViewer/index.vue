@@ -25,43 +25,32 @@ import { useDoc } from '@/composables/useDoc'
 import 'highlight.js/styles/github.css'
 
 const props = defineProps({
-  // 文档 ID（从 API 加载）
-  docId: {
-    type: String,
-    default: ''
-  },
-  // 文档路径（从静态文件加载，保留兼容）
   docPath: {
     type: String,
-    default: ''
+    required: true
   }
 })
 
-const { docHtml, loading, error, loadDoc, loadDocFromApi } = useDoc()
+const { docHtml, loading, error, loadDoc } = useDoc()
 
 // 重新加载
 function reload() {
-  load()
-}
-
-// 加载文档
-function load() {
-  if (props.docId) {
-    // 优先使用 docId 从 API 加载
-    loadDocFromApi(props.docId)
-  } else if (props.docPath) {
-    // 回退到 docPath 从静态文件加载
+  if (props.docPath) {
     loadDoc(props.docPath)
   }
 }
 
-// 监听 props 变化
-watch([() => props.docId, () => props.docPath], () => {
-  load()
+// 监听路径变化
+watch(() => props.docPath, (newPath) => {
+  if (newPath) {
+    loadDoc(newPath)
+  }
 }, { immediate: true })
 
 onMounted(() => {
-  load()
+  if (props.docPath) {
+    loadDoc(props.docPath)
+  }
 })
 </script>
 

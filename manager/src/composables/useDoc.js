@@ -1,7 +1,6 @@
 import { ref } from 'vue'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
-import { docApi } from '@/api/doc'
 
 // 配置 marked
 marked.setOptions({
@@ -24,32 +23,8 @@ export function useDoc() {
   const docHtml = ref('')
   const loading = ref(false)
   const error = ref(null)
-  const docInfo = ref(null)
 
-  // 从 API 加载文档（通过 docId）
-  async function loadDocFromApi(docId) {
-    if (!docId) {
-      error.value = '文档 ID 不能为空'
-      return
-    }
-
-    loading.value = true
-    error.value = null
-
-    try {
-      const res = await docApi.getContent(docId)
-      docInfo.value = res.doc
-      docContent.value = res.content
-      docHtml.value = marked.parse(res.content)
-    } catch (e) {
-      error.value = e.response?.data?.error || e.message || '文档加载失败'
-      console.error('文档加载失败:', e)
-    } finally {
-      loading.value = false
-    }
-  }
-
-  // 加载文档（保留原方法，用于加载静态文件）
+  // 加载文档
   async function loadDoc(docPath) {
     if (!docPath) {
       error.value = '文档路径不能为空'
@@ -67,7 +42,6 @@ export function useDoc() {
 
       docContent.value = await response.text()
       docHtml.value = marked.parse(docContent.value)
-      docInfo.value = null
     } catch (e) {
       error.value = e.message
       console.error('文档加载失败:', e)
@@ -100,11 +74,9 @@ export function useDoc() {
   return {
     docContent,
     docHtml,
-    docInfo,
     loading,
     error,
     loadDoc,
-    loadDocFromApi,
     loadProjectSpec,
     loadProjectChangelog,
     loadPageSpec,

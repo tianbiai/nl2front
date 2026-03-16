@@ -76,17 +76,6 @@ const routes = [
           permission: 'settings',
           requireAdmin: true
         }
-      },
-      {
-        path: 'doc-library',
-        name: 'DocLibrary',
-        component: () => import('@/views/doc-library/index.vue'),
-        meta: {
-          title: '文档库',
-          icon: 'Document',
-          permission: 'doc-library',
-          requireAdmin: true
-        }
       }
     ]
   },
